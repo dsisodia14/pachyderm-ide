@@ -54,10 +54,10 @@ Code layout, as of 4/20:
 │   ├── authenticator - python package for authenticating users
 │   ├── Dockerfile - dockerfile for building the hub image
 │   └── Makefile - targets for building/pushing the hub image
-└── user - the Jupyter image for individual users
-    ├── config.sh - called when a user logs into JupyterHub via the pachyderm authenticator, to automatically configure `pachctl` in the user environment
-    ├── Dockerfile - dockerfile for building the user image
-    └── Makefile - targets for building/pushing the user image
+├── user - the Jupyter image for individual users
+├── ├── config.sh - called when a user logs into JupyterHub via the pachyderm authenticator, to automatically configure `pachctl` in the user environment
+├── ├── Dockerfile - dockerfile for building the user image
+├── └── Makefile - targets for building/pushing the user image
 ├── LICENSE - the license
 ├── Makefile - targets developers can run
 ├── README.md - the readme
