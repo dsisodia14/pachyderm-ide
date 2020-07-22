@@ -7,8 +7,10 @@ A JupyterHub-based IDE for Pachyderm. Built to deploy on Kubernetes, alongside P
 ## Deploying
 
 1) [Deploy pachyderm](https://docs.pachyderm.com/latest/getting_started/local_installation/).
-2) Run `pachctl deploy ide`.
-3) If there's a firewall between you and the kubernetes cluster, make sure to punch a hole so you can connect to port 80 on it. [See cloud-specific instructions here.](https://zero-to-jupyterhub.readthedocs.io/en/latest/create-k8s-cluster.html)
+2) Activate enterprise edition `pachctl enterprise activate <activation-code>`. 
+3) [Activate access controls](https://docs.pachyderm.com/latest/enterprise/auth/enable-auth/#activate-access-controls-with-pachctl) `pachctl auth activate`
+4) Run `pachctl deploy ide`.
+5) If there's a firewall between you and the kubernetes cluster, make sure to punch a hole so you can connect to port 80 on it. [See cloud-specific instructions here.](https://zero-to-jupyterhub.readthedocs.io/en/latest/create-k8s-cluster.html)
 
 If you need to customize your IDE deployment more than what `pachctl deploy ide` offers, see our [advanced setup guide.](doc/advanced_setup.md)
 
@@ -17,7 +19,7 @@ If you need to customize your IDE deployment more than what `pachctl deploy ide`
 Once deployed, navigate to your instance:
 
 - By default, it should be reachable on port 80 of your cluster's hostname.
-- On minikube, navigate to one of the URLs printed out when you run `minikube service proxy-public --url`.
+- On minikube, navigate to one of the URLs printed out when you run `minikube service proxy-public --url | head -n 1`.
 
 You should see a login page. Once you're logged in, you should be able to connect to the Pachyderm cluster from within a Jupyter notebook; e.g., if Pachyderm auth is enabled, try this:
 
