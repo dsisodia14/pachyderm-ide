@@ -1,5 +1,5 @@
 {
-    "pachctl": "1.10.0",
-    "jupyterhub": "0.8.2",
-    "ide": "1.0.0"
+    "pachctl": "1.11.0",
+    "jupyterhub": "0.9.1",
+    "ide": "1.1.0"
 }
