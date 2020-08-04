@@ -26,7 +26,7 @@ async def run(cmd, *args, timeout=None):
 def ping(hostname):
     conn = http.client.HTTPConnection(hostname)
     conn.request("GET", "/")
-    conn.getresponse()
+    assert conn.getresponse() == 200
 
 async def minikube():
     urls = (await run("minikube", "service", "proxy-public", "--url")).strip().split("\n")
