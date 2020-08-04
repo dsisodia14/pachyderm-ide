@@ -16,7 +16,8 @@ docker-build-local:
 deploy-local:
 	$(GOPATH)/bin/pachctl deploy ide \
         --user-image "pachyderm/ide-user:local" \
-        --hub-image "pachyderm/ide-hub:local"
+        --hub-image "pachyderm/ide-hub:local" \
+        --jupyterhub-chart-version "$(shell jq -r .jupyterhub version.json)"
 
 jupyterhub-dev:
 	. venv/bin/activate && pip install jupyterhub
