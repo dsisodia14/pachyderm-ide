@@ -8,7 +8,7 @@ import asyncio
 import argparse
 import http.client
 
-async def retry(f, attempts=10, sleep=1.0):
+async def retry(f, attempts=10, sleep=5.0):
     for i in range(attempts):
         try:
             return await f()

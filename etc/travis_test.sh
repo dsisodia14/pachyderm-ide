@@ -23,15 +23,9 @@ function deploy_pachyderm {
     /usr/bin/pachctl auth whoami
 }
 
-# Waits for a jupyterhub to be ready
-function wait_for_jupyterhub {
-    ./etc/ide_url.py minikube --attempts=100
-}
-
 # Executes a test run with pachyderm auth
 function test_run_with_auth {
-    wait_for_jupyterhub
-    url=$(./etc/ide_url.py minikube)
+    url=$(./etc/ide_url.py minikube --attempts=100)
     python3 ./etc/test_e2e.py "${url}" "" "$(pachctl auth get-otp)" --headless
 }
 
@@ -78,14 +72,13 @@ case "${VARIANT}" in
         # (non-pachyderm) login mechanism
         print_section "Create a base deployment of jupyterhub"
         helm upgrade --install jhub jupyterhub/jupyterhub --version 0.8.2 --values ./etc/config/test_base.yaml
-        wait_for_jupyterhub
+        ./etc/ide_url.py minikube --attempts=100
 
         # Patch in our custom user image
         print_section "Patch in the user image"
         helm upgrade --install jhub jupyterhub/jupyterhub --version 0.8.2 --values ./etc/config/test_patch.yaml
 
-        wait_for_jupyterhub
-        url=$(./etc/ide_url.py minikube)
+        url=$(./etc/ide_url.py minikube --attempts=100)
         python3 ./etc/test_e2e.py "${url}" "jovyan" "jupyter" --headless --no-auth-check
         ;;
     *)
