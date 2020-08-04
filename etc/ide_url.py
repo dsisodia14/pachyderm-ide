@@ -32,7 +32,7 @@ async def minikube():
     urls = (await run("minikube", "service", "proxy-public", "--url")).strip().split("\n")
     for i, url in enumerate(urls):
         try:
-            ping(url)
+            ping(url.split("//")[1])
             return url
         except:
             if i == len(urls) - 1:
