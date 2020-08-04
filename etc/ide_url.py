@@ -4,6 +4,7 @@
 Gets the URL to connect to the IDE
 """
 
+import sys
 import asyncio
 import argparse
 import http.client
@@ -18,12 +19,14 @@ async def retry(f, attempts=10, sleep=5.0):
             await asyncio.sleep(sleep)
 
 async def run(cmd, *args, timeout=None):
+    print("running: {} {}".format(cmd, " ".join(args)), file=sys.stderr)
     proc = await asyncio.create_subprocess_exec(cmd, *args, stdout=asyncio.subprocess.PIPE)
     future = proc.communicate()
     stdout, _ = await (future if timeout is None else asyncio.wait_for(future, timeout=timeout))
     return stdout.decode("utf8")
 
 def ping(hostname):
+    print("pinging: {}".format(hostname), file=sys.stderr)
     conn = http.client.HTTPConnection(hostname)
     conn.request("GET", "/")
     assert conn.getresponse() == 200
