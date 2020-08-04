@@ -29,7 +29,8 @@ def ping(hostname):
     print("pinging: {}".format(hostname), file=sys.stderr)
     conn = http.client.HTTPConnection(hostname)
     conn.request("GET", "/")
-    assert conn.getresponse() == 200
+    status = conn.getresponse().status
+    assert status >= 200 and status <= 399, "unexpected status: {}".format(status)
 
 async def minikube():
     urls = (await run("minikube", "service", "proxy-public", "--url")).strip().split("\n")
@@ -49,7 +50,7 @@ async def cloud():
     service_info = (await run("kubectl", "get", "service", "proxy-public")).strip().split("\n")
     ip = service_info[1].split()[3]
     ping(ip)
-    return "http://" + ip
+    return "http://{}".format(ip)
 
 async def main(variant, attempts):
     if args.variant == "minikube":
