@@ -60,9 +60,9 @@ pip3 install -r etc/test_requirements.txt
 case "${VARIANT}" in
     native)
         # Installs pachctl with native support
-        # TODO: remove once native deployments are stable
+        # TODO: remove once new native deployment args are stable, in 1.12
         pushd ~
-            git clone --single-branch --branch bump-pachyderm-ide --depth 1 https://github.com/pachyderm/pachyderm.git
+            git clone --single-branch --branch master --depth 1 https://github.com/pachyderm/pachyderm.git
             pushd pachyderm
                 make install
             popd
