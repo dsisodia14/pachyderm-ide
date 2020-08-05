@@ -6,7 +6,7 @@ venv:
 
 test-e2e: venv
 	. venv/bin/activate && python3 ./etc/test_e2e.py \
-		"$(shell minikube service proxy-public --url | head -n 1)" \
+		"$(shell ./etc/ide_url.py minikube)" \
         "" "$(shell pachctl auth get-otp)" --debug
 
 docker-build-local:
@@ -16,7 +16,8 @@ docker-build-local:
 deploy-local:
 	$(GOPATH)/bin/pachctl deploy ide \
         --user-image "pachyderm/ide-user:local" \
-        --hub-image "pachyderm/ide-hub:local"
+        --hub-image "pachyderm/ide-hub:local" \
+        --jupyterhub-chart-version "$(shell jq -r .jupyterhub version.json)"
 
 jupyterhub-dev:
 	. venv/bin/activate && pip install jupyterhub
