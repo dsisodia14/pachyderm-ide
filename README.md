@@ -19,7 +19,7 @@ If you need to customize your IDE deployment more than what `pachctl deploy ide`
 Once deployed, navigate to your instance:
 
 - By default, it should be reachable on port 80 of your cluster's hostname.
-- On minikube, navigate to one of the URLs printed out when you run `minikube service proxy-public --url | head -n 1`.
+- On minikube, navigate to one of the URLs printed out when you run `minikube service proxy-public --url`.
 
 You should see a login page. Once you're logged in, you should be able to connect to the Pachyderm cluster from within a Jupyter notebook; e.g., if Pachyderm auth is enabled, try this:
 
