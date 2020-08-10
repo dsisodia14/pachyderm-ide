@@ -7,8 +7,10 @@ A JupyterHub-based IDE for Pachyderm. Built to deploy on Kubernetes, alongside P
 ## Deploying
 
 1) [Deploy pachyderm](https://docs.pachyderm.com/latest/getting_started/local_installation/).
-2) Run `pachctl deploy ide`.
-3) If there's a firewall between you and the kubernetes cluster, make sure to punch a hole so you can connect to port 80 on it. [See cloud-specific instructions here.](https://zero-to-jupyterhub.readthedocs.io/en/latest/create-k8s-cluster.html)
+2) Activate enterprise edition `pachctl enterprise activate <activation-code>`. 
+3) [Activate access controls](https://docs.pachyderm.com/latest/enterprise/auth/enable-auth/#activate-access-controls-with-pachctl) `pachctl auth activate`
+4) Run `pachctl deploy ide`.
+5) If there's a firewall between you and the kubernetes cluster, make sure to punch a hole so you can connect to port 80 on it. [See cloud-specific instructions here.](https://zero-to-jupyterhub.readthedocs.io/en/latest/create-k8s-cluster.html)
 
 If you need to customize your IDE deployment more than what `pachctl deploy ide` offers, see our [advanced setup guide.](doc/advanced_setup.md)
 
